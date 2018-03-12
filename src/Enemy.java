@@ -12,5 +12,6 @@ public abstract class Enemy extends AliveThing {
         difficulty = difficulty/2;
         System.out.println("test");
         System.out.println("test2");
+        System.out.println("test3");
     }
 }
