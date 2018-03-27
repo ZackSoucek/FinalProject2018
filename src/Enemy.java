@@ -10,5 +10,6 @@ public abstract class Enemy extends AliveThing {
         super(h,xPos,yPos, health,armor ,weapon);
         this.difficulty = difficulty;
         //this is the Zack version 327 part 2
+        //https://codeforphilly.github.io/decentralized-data/tutorials/git-basics/
     }
 }
