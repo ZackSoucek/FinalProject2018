@@ -1,12 +1,18 @@
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.sun.glass.ui.View;
 
 public class TestMenuScreen implements Screen {
     final GameMain game;
 
-    OrthographicCamera camera;
+    private OrthographicCamera camera;
+    private Viewport viewport;
+
 
     //sizes for main menu
     public static float WORLD_WIDTH = 1600f;//w units
@@ -18,6 +24,7 @@ public class TestMenuScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WORLD_WIDTH, WORLD_HEIGHT);
+        viewport = new FitViewport(WORLD_WIDTH,WORLD_HEIGHT,camera);
     }
 
     @Override
@@ -34,20 +41,25 @@ public class TestMenuScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.font.draw(game.batch, "TEST Main Manu", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
+        game.font.draw(game.batch, "TEST Main Menu", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
         game.font.draw(game.batch, "Click anywhere to begin!", WORLD_WIDTH/2, WORLD_HEIGHT/2-40);
-        game.batch.end();
 
-        if (Gdx.input.isTouched()) {
+        boolean isLeftClicked = Gdx.input.isButtonPressed(Input.Buttons.LEFT);
+        game.font.draw(game.batch, (isLeftClicked ? "Left" : "No Left"), 60f, WORLD_HEIGHT-120f);
+
+
+        if(Gdx.input.isTouched()){
+            System.out.println("SHit");
             game.setScreen(new TestGameScreen(game));
             dispose();
         }
+        game.batch.end();
 
     }
 
     @Override
     public void resize(int i, int i1) {
-
+        viewport.update(i,i1);
     }
 
     @Override
