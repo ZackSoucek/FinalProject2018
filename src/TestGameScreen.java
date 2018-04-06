@@ -13,8 +13,8 @@ public class TestGameScreen implements Screen {
     private Viewport viewport;
 
     //sizes for main menu
-    public static float WORLD_WIDTH = 1600f;//w units
-    public static float WORLD_HEIGHT = 960f;//h units
+    public static float WORLD_WIDTH = 800f;//w units
+    public static float WORLD_HEIGHT = 480f;//h units
 
     public TestGameScreen(final GameMain game){
         this.game = game;

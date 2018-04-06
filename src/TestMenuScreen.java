@@ -47,13 +47,12 @@ public class TestMenuScreen implements Screen {
         boolean isLeftClicked = Gdx.input.isButtonPressed(Input.Buttons.LEFT);
         game.font.draw(game.batch, (isLeftClicked ? "Left" : "No Left"), 60f, WORLD_HEIGHT-120f);
 
+        game.batch.end();
 
         if(Gdx.input.isTouched()){
-            System.out.println("SHit");
             game.setScreen(new TestGameScreen(game));
             dispose();
         }
-        game.batch.end();
 
     }
 
