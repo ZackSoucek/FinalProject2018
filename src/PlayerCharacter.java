@@ -7,12 +7,12 @@ public class PlayerCharacter extends AliveThing {
     private int level;
 
     PlayerCharacter() {
-        super(  new Rectangle(0, 0, 64, 64),
-                new Texture(Gdx.files.internal("assets/Flabio.png")),
+        super(  new Rectangle(0, 0, 32, 32),
+                new Texture(Gdx.files.internal("assets/FlabioFinal.png")),
                 20,
                 20,
                 1,
-                new Weapon("Basic Sword", 2 , 10,1));
+                new Weapon("Basic Sword", 2 , 50,1));
         this.xp = 0;
         this.xp = 0;
     }

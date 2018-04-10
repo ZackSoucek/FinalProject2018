@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class GameMain extends Game {
     public SpriteBatch batch;
     public BitmapFont font;
+    public PlayerCharacter playerCharacter;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         font = new BitmapFont();
+        playerCharacter = new PlayerCharacter();
         this.setScreen(new TestMenuScreen(this));
 
     }
