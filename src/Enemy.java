@@ -17,4 +17,8 @@ public abstract class Enemy extends AliveThing {
         //this is the Zack version 327 part 2
         //https://codeforphilly.github.io/decentralized-data/tutorials/git-basics/
     }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
 }
