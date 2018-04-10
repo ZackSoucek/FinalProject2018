@@ -1,27 +1,23 @@
-public abstract class Entity implements Collidable, Mobile {
-    //TODO hitbox
-    private double velocityY;
-    private double velocityX;
-    int xPos;
-    int yPos;
-    private HitBox hitBox;
-    public Entity(){
-        this.hitBox = new HitBox();
-        this.velocityX = 0;
-        this.velocityY = 0;
-        xPos = 0;
-        yPos = 0;
-    }
-    public Entity(HitBox h, int xPos, int yPos){
-        this.hitBox = h;
-        this.velocityX = 0;
-        this.velocityY = 0;
-        this.yPos = yPos;
-        this.xPos = xPos;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
+
+public abstract class Entity {
+    public Rectangle hitBox;
+    public Texture texture;
+    //all entitys need a rectangle for where they are and a texture
+
+
+    public Entity() {
+        this.hitBox = new Rectangle();
+        this.texture = new Texture(Gdx.files.internal("assets/Flabio.png"));//defaults to the flabio texture
     }
 
-    @Override
-    public void collide(Collidable otherCollidable) {
-        //todo change velocities.
+    public Entity(Rectangle rect, Texture texture) {
+        this.hitBox = rect;
+        this.texture = texture;
+
     }
+
+
 }

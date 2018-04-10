@@ -18,13 +18,13 @@ public class TestGameScreen implements Screen {
     public static float WORLD_WIDTH = 800f;//w units
     public static float WORLD_HEIGHT = 480f;//h units
 
-    public TestGameScreen(final GameMain game){
+    public TestGameScreen(final GameMain game) {
         this.game = game;
         flabio = new Texture(Gdx.files.internal("assets/Flabio.png"));
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WORLD_WIDTH, WORLD_HEIGHT);
-        viewport = new FitViewport(WORLD_WIDTH,WORLD_HEIGHT,camera);
+        viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
 
     }
 
@@ -36,7 +36,7 @@ public class TestGameScreen implements Screen {
 
     @Override
     public void render(float v) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
@@ -44,9 +44,8 @@ public class TestGameScreen implements Screen {
 
         game.batch.begin();
         game.font.draw(game.batch, "TEST Game Screen", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
-        game.font.draw(game.batch, "this shits not done", WORLD_WIDTH/2, WORLD_HEIGHT/2-40);
-        game.batch.draw(flabio, 200,200);
-
+        game.font.draw(game.batch, "this shits not done", WORLD_WIDTH / 2, WORLD_HEIGHT / 2 - 40);
+        game.batch.draw(flabio, 200, 200);
 
 
         game.batch.end();
@@ -55,7 +54,7 @@ public class TestGameScreen implements Screen {
 
     @Override
     public void resize(int i, int i1) {
-        viewport.update(i,i1);
+        viewport.update(i, i1);
     }
 
     @Override
