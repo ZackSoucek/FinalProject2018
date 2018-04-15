@@ -1,8 +1,10 @@
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -17,6 +19,9 @@ public class TestGameScreen implements Screen {
     //sizes for main menu
     public static float WORLD_WIDTH = 1600f;//w units
     public static float WORLD_HEIGHT = 960f;//h units
+
+    private Texture floorTexture = new Texture(Gdx.files.internal("assets/FlabioFinal.png"));
+    private Sprite floor = new Sprite(floorTexture,0,0, (int) WORLD_WIDTH,25);
 
     public TestGameScreen(final GameMain game) {
         this.game = game;
@@ -40,8 +45,10 @@ public class TestGameScreen implements Screen {
         game.font.draw(game.batch, "TEST Game Screen", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
         game.font.draw(game.batch, "this shits not done", WORLD_WIDTH / 2, WORLD_HEIGHT / 2 - 40);
 
-        game.batch.draw(game.playerCharacter.texture, game.playerCharacter.hitBox.x, game.playerCharacter.hitBox.y);
-
+        game.playerCharacter.sprite.draw(game.batch);
+        //puts in player
+        floor.draw(game.batch);
+        //put in floor
 
         game.batch.end();
 
@@ -57,16 +64,31 @@ public class TestGameScreen implements Screen {
 
         game.batch.begin();
         game.font.draw(game.batch, "TEST Game Screen", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
+
+        //move player with input
         if(Gdx.input.isTouched()){//test to put the player where the mouse is
             Vector3 touchpos = new Vector3();
             touchpos.set(Gdx.input.getX(),Gdx.input.getY(),0);
             camera.unproject(touchpos);
-            game.playerCharacter.hitBox.x = touchpos.x;
-            game.playerCharacter.hitBox.y = touchpos.y;
+
+            game.playerCharacter.sprite.setX(touchpos.x);
+            game.playerCharacter.sprite.setY(touchpos.y);
+
         }
         //todo a real control scheme
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+                game.playerCharacter.sprite.translateX(-10.0f);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+                game.playerCharacter.sprite.translateX(10.0f);
+        }
 
-        game.batch.draw(game.playerCharacter.texture, game.playerCharacter.hitBox.x, game.playerCharacter.hitBox.y);
+
+
+        game.playerCharacter.sprite.draw(game.batch);//update player position
+        //done with player movement
+
+        floor.draw(game.batch);//have persistant floor
 
 
         game.batch.end();

@@ -1,5 +1,6 @@
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 
 public class PlayerCharacter extends AliveThing {
@@ -8,8 +9,7 @@ public class PlayerCharacter extends AliveThing {
     public final int EXP_PER_LEVEL = 10;
 
     PlayerCharacter() {
-        super(new Rectangle(0, 0, 32, 32),
-                new Texture(Gdx.files.internal("assets/FlabioFinal.png")),
+        super(new Sprite(new Texture(Gdx.files.internal("assets/FlabioFinal.png"))),
                 20,
                 20,
                 1,

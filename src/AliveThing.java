@@ -1,4 +1,5 @@
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 
 public abstract class AliveThing extends Entity implements CanAttack {
@@ -15,8 +16,8 @@ public abstract class AliveThing extends Entity implements CanAttack {
         this.armor = 0;
     }
 
-    public AliveThing(Rectangle rectangle, Texture texture, int healthTotal, int health, int armor, Weapon weapon) {
-        super(rectangle, texture);
+    public AliveThing(Sprite sprite, int healthTotal, int health, int armor, Weapon weapon) {
+        super(sprite);
         this.healthTotal = healthTotal;
         this.health = health;
         this.armor = armor;

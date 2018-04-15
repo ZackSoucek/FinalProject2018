@@ -1,4 +1,5 @@
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Inanimate extends Entity{
@@ -8,7 +9,7 @@ public class Inanimate extends Entity{
     public Inanimate(){
         super();
     }
-    public Inanimate(Rectangle rectangle,Texture texture){
-        super(rectangle,texture);
+    public Inanimate(Sprite sprite){
+        super(sprite);
     }
 }
