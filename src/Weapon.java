@@ -1,9 +1,9 @@
 public class Weapon {
-    private int damage;
-    private double swingSpeed;
+    public int damage;
+    public double swingSpeed;
     //measured in seconds to complete
-    private int reach;
-    private String name;
+    public int reach;
+    public String name;
 
     public Weapon(){
         this.damage = 1;
@@ -19,4 +19,6 @@ public class Weapon {
         this.swingSpeed = swingSpeed;
         this.damage = damage;
     }
+
+
 }
