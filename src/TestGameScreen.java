@@ -20,8 +20,7 @@ public class TestGameScreen implements Screen {
     public static float WORLD_WIDTH = 1600f;//w units
     public static float WORLD_HEIGHT = 960f;//h units
 
-    private Texture floorTexture = new Texture(Gdx.files.internal("assets/FlabioFinal.png"));
-    private Sprite floor = new Sprite(floorTexture, 0, 0, (int) WORLD_WIDTH, 25);
+    private final Floor floor = new Floor();
 
     public static float GRAVITY = 10f;
     public static float JUMP_HEIGHT = 60f;
@@ -54,7 +53,7 @@ public class TestGameScreen implements Screen {
 
         game.playerCharacter.sprite.draw(game.batch);
         //puts in player
-        floor.draw(game.batch);
+        floor.sprite.draw(game.batch);
         //put in floor
 
         game.batch.end();
@@ -83,19 +82,21 @@ public class TestGameScreen implements Screen {
             deltaYVel = 0;//zero out y velocity
 
         }
-        //todo Remove this for final version
+        //todo Remove this for final version ^
         deltaYVel--;//lowers y velocity to create GRAVITY
-        if (game.playerCharacter.sprite.getBoundingRectangle().overlaps(floor.getBoundingRectangle())) {
-            deltaYVel = 0;//on floor so fall stops
-            deltaXVel /= 3;
-            game.playerCharacter.sprite.setY(20);
+        if (game.playerCharacter.sprite.getBoundingRectangle().overlaps(floor.sprite.getBoundingRectangle())) {
+            deltaYVel = 0;//hit floor so fall stops
             onFloor = true;
-            if (Gdx.input.isKeyJustPressed((Input.Keys.UP))) {//only junp off of floor
+        } else
+            onFloor = false;
+        if(onFloor){
+            deltaXVel /= 2;
+            game.playerCharacter.sprite.setY(floor.sprite.getY() + floor.sprite.getHeight());
+            if (Gdx.input.isKeyPressed((Input.Keys.UP))) {//only junp off of floor
                 deltaYVel += JUMP_HEIGHT;//Y velocity is increased
             }
 
-        } else
-            onFloor = false;
+        }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             deltaXVel = -(onFloor ?  MOVE_SPEED: MOVE_SPEED/2);
         }
@@ -112,7 +113,7 @@ public class TestGameScreen implements Screen {
         game.playerCharacter.sprite.draw(game.batch);//update player position
         //done with player movement
 
-        floor.draw(game.batch);//have persistant floor
+        floor.sprite.draw(game.batch);
 
 
         game.batch.end();
@@ -121,7 +122,7 @@ public class TestGameScreen implements Screen {
 
     @Override
     public void resize(int i, int i1) {
-        viewport.update(i, i1);
+//        viewport.update(i, i1); using this breaks it i think
     }
 
     @Override

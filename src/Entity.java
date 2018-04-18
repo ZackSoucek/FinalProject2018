@@ -13,10 +13,7 @@ public abstract class Entity {
     }
 
     public Entity(Sprite sprite) {
-
         this.sprite = sprite;
-
-
     }
 
 
