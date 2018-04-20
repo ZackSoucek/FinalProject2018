@@ -41,6 +41,7 @@ public class TestGameScreen implements Screen {
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
 
     }
+    //todo add method to fill enemies with enemies that add up to enemy level
 
 
     @Override
