@@ -1,13 +1,11 @@
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-
-public class TestMenuScreen implements Screen {
+public class GameOverScreen implements Screen {
     final GameMain game;
 
     private OrthographicCamera camera;
@@ -19,7 +17,7 @@ public class TestMenuScreen implements Screen {
     public static float WORLD_HEIGHT = 960f;//h units
 
 
-    public TestMenuScreen(final GameMain game) {
+    public GameOverScreen(GameMain game){
         this.game = game;
 
         camera = new OrthographicCamera();
@@ -41,16 +39,14 @@ public class TestMenuScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.font.draw(game.batch, "TEST Main Menu", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
-        game.font.draw(game.batch, "Click anywhere to begin!", WORLD_WIDTH/2, WORLD_HEIGHT/2-40);
-
-        boolean isLeftClicked = Gdx.input.isButtonPressed(Input.Buttons.LEFT);
-        game.font.draw(game.batch, (isLeftClicked ? "Left" : "No Left"), 60f, WORLD_HEIGHT-120f);
+        game.font.draw(game.batch, "Game Over", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
+        game.font.draw(game.batch, "You Scored: "+ game.getScore() , WORLD_WIDTH/2, WORLD_HEIGHT/2-40);
+        game.font.draw(game.batch, "Click to go back to main menu", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
 
         game.batch.end();
 
         if(Gdx.input.isTouched()){
-            game.setScreen(new TestGameScreen(game));
+            game.setScreen(new TestMenuScreen(game));
             dispose();
             game.incrementLevel();
         }
@@ -81,4 +77,5 @@ public class TestMenuScreen implements Screen {
     public void dispose() {
 
     }
+
 }

@@ -3,11 +3,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.ArrayList;
 
 public class TestGameScreen implements Screen {
 
@@ -28,6 +28,10 @@ public class TestGameScreen implements Screen {
     public Boolean onFloor = false;
     float deltaYVel = 0;
     float deltaXVel = 0;
+
+
+
+    private ArrayList<Enemy> enemies = new ArrayList<>();
 
     public TestGameScreen(final GameMain game) {
         this.game = game;
@@ -86,12 +90,12 @@ public class TestGameScreen implements Screen {
         deltaYVel--;//lowers y velocity to create GRAVITY
         if (game.playerCharacter.sprite.getBoundingRectangle().overlaps(floor.sprite.getBoundingRectangle())) {
             deltaYVel = 0;//hit floor so fall stops
+            game.playerCharacter.sprite.setY(floor.sprite.getY() + floor.sprite.getHeight());
             onFloor = true;
         } else
             onFloor = false;
         if(onFloor){
             deltaXVel /= 2;
-            game.playerCharacter.sprite.setY(floor.sprite.getY() + floor.sprite.getHeight());
             if (Gdx.input.isKeyPressed((Input.Keys.UP))) {//only junp off of floor
                 deltaYVel += JUMP_HEIGHT;//Y velocity is increased
             }
@@ -108,6 +112,9 @@ public class TestGameScreen implements Screen {
         game.playerCharacter.sprite.translateY(GRAVITY * deltaYVel * delta);//acceleration works by lovering the Y Velocity per second
 //x movement
         game.playerCharacter.sprite.translateX( deltaXVel * delta );
+        //https://www.youtube.com/watch?v=sT4f-aIEcQQ
+        //video where it is talked about, code looks not that useful though
+
 
 
         game.playerCharacter.sprite.draw(game.batch);//update player position
