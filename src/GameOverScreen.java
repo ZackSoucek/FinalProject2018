@@ -1,4 +1,5 @@
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -41,11 +42,11 @@ public class GameOverScreen implements Screen {
         game.batch.begin();
         game.font.draw(game.batch, "Game Over", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
         game.font.draw(game.batch, "You Scored: "+ game.getScore() , WORLD_WIDTH/2, WORLD_HEIGHT/2-40);
-        game.font.draw(game.batch, "Click to go back to main menu", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
+        game.font.draw(game.batch, "Press any key to go back to the main menu", WORLD_WIDTH / 2, WORLD_HEIGHT / 2-80);
 
         game.batch.end();
 
-        if(Gdx.input.isTouched()){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)){
             game.setScreen(new TestMenuScreen(game));
             dispose();
             game.incrementLevel();

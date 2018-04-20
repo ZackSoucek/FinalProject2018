@@ -17,7 +17,7 @@ public class GameMain extends Game {
         font = new BitmapFont();
         playerCharacter = new PlayerCharacter();
         score = 0;
-        this.setScreen(new TestMenuScreen(this));
+        this.setScreen(new GameOverScreen(this));
 
     }
 
