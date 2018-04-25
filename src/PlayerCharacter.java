@@ -47,9 +47,25 @@ public class PlayerCharacter extends AliveThing {
 
     @Override
     public void attack(AliveThing target) {
-        target.health = target.health - this.weapon.damage;
+        target.takeDamage(this.weapon.damage);
         if (target.health <= 0 && target instanceof Enemy) {
             addXP(((Enemy) target).getDifficulty());
         }
+    }
+
+    public boolean isTouching(Entity e){
+        return this.sprite.getBoundingRectangle().overlaps(e.sprite.getBoundingRectangle());
+    }
+
+    @Override
+    public void collidePlayer()  {
+        System.out.println("NO\nPLAYER DOES NTO NEED TO CHECK COLLISION WITH ITSELF\nNEVER RUN THIS");
+        int i = 1/0;
+    }
+
+    @Override
+    public void think() {
+        System.out.println("NO\nPLAYER DOES NTO NEED TO CHECK COLLISION WITH ITSELF\nNEVER RUN THIS");
+        int i = 1/0;
     }
 }

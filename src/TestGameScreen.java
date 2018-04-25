@@ -31,7 +31,7 @@ public class TestGameScreen implements Screen {
 
 
 
-    private ArrayList<Enemy> enemies = new ArrayList<>();
+    private ArrayList<Entity> entities = new ArrayList<>();
 
     public TestGameScreen(final GameMain game) {
         this.game = game;
@@ -41,8 +41,7 @@ public class TestGameScreen implements Screen {
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
 
     }
-    //todo add method to fill enemies with enemies that add up to enemy level
-
+    //todo add method to fill entities with enemies that add up to enemy level
 
     @Override
     public void show() {
@@ -64,16 +63,45 @@ public class TestGameScreen implements Screen {
         game.batch.end();
 
     }
+    public void doCollisions(){
+        for (Entity e: entities ) {//for each entity in the level
+            if(game.playerCharacter.isTouching(e)){//if they are colliding with the player
+                e.collidePlayer();//do what they do when the collide with the player
+            }
+        }
+    }
+    public void doThink(){
+        for (Entity e: entities ) {//for each entity in the level
+            e.think();//do their AI
+        }
+    }
+
 
     @Override
     public void render(float delta) {
+        /*
+        Steps to render:
+        1. wipe prevoius screen
+        2. check for colissions
+        3. computer inteactions
+        4. player imput
+        5. draw effect of all of this
+         */
+        //1
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //2
+        //done first sothat the rest can be affected by it.
+        doCollisions();//check if there was any collisions from last frames actions.
+        //3
+        //done after collisons so it is based on it
+        doThink();
 
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
-
         game.batch.begin();
+
+
         game.font.draw(game.batch, "TEST Game Screen", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
 
         //move player with mouce movement

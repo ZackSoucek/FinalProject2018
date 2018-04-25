@@ -1,7 +1,6 @@
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Entity {
     public Sprite sprite;
@@ -15,6 +14,8 @@ public abstract class Entity {
     public Entity(Sprite sprite) {
         this.sprite = sprite;
     }
+     public abstract void think();//should handle movement and such
+     public abstract void collidePlayer();//run when player touches them
 
 
 }
