@@ -63,7 +63,7 @@ public class TestGameScreen implements Screen {
 
     }
 
-    public void doCollisions() {
+    public void doCollisionsWithPlayer() {
         for (Entity e : entities) {//for each entity in the level
             if (game.playerCharacter.isTouching(e)) {//if they are colliding with the player
                 e.collidePlayer();//do what they do when the collide with the player
@@ -93,11 +93,11 @@ public class TestGameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //2
         //done first so that the rest can be affected by it.
-        doCollisions();//check if there was any collisions from last frames actions.
+        doCollisionsWithPlayer();//check if there was any collisions from last frames actions.
+        //todo inter-entity collisions
         //3
         //done after collisions so it is based on it
         doThink();
-
         //Player input section
 
         if (Gdx.input.isTouched()) {//test to put the player where the mouse is
