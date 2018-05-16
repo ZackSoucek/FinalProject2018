@@ -3,6 +3,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -58,6 +59,8 @@ public class TestGameScreen implements Screen {
         //puts in player
         floor.sprite.draw(game.batch);
         //put in floor
+        //entities.addAll(EnemyGenerator.generate(game.getLevel(), 100, 500, 100, 500));
+        entities.add(new Zombie((int)WORLD_WIDTH / 2,(int)WORLD_HEIGHT / 2, new Texture(Gdx.files.internal("zombie.png"))));
 
         game.batch.end();
 
@@ -66,14 +69,23 @@ public class TestGameScreen implements Screen {
     public void doCollisionsWithPlayer() {
         for (Entity e : entities) {//for each entity in the level
             if (game.playerCharacter.isTouching(e)) {//if they are colliding with the player
-                e.collidePlayer();//do what they do when the collide with the player
+                e.collidePlayer(game.playerCharacter);//do what they do when the collide with the player\
+                //the entities need the player character so they know what player character to hit
+            }
+        }
+    }
+
+    public void doMove() {
+        for (Entity e : entities) {
+            if (e instanceof Projectile) {
+                ((Projectile) e).move(game);
             }
         }
     }
 
     public void doThink() {
         for (Entity e : entities) {//for each entity in the level
-            e.think();//do their AI
+            e.think(game);//do their AI
         }
     }
 
@@ -93,11 +105,11 @@ public class TestGameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //2
         //done first so that the rest can be affected by it.
+        doMove();//nonvolunatary action of porjectiles etc
         doCollisionsWithPlayer();//check if there was any collisions from last frames actions.
-        //todo inter-entity collisions
         //3
         //done after collisions so it is based on it
-        doThink();
+        doThink();//TODO put player input in here?
         //Player input section
 
         if (Gdx.input.isTouched()) {//test to put the player where the mouse is
@@ -149,6 +161,9 @@ public class TestGameScreen implements Screen {
         game.batch.begin();
         game.font.draw(game.batch, "TEST Game Screen", WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
         game.playerCharacter.sprite.draw(game.batch);//update player position
+        for (Entity e : entities) {//draw all entities
+            e.sprite.draw(game.batch);
+        }
         floor.sprite.draw(game.batch);
         game.batch.end();
 
@@ -156,7 +171,7 @@ public class TestGameScreen implements Screen {
 
     @Override
     public void resize(int i, int i1) {
-//        viewport.update(i, i1); using this breaks it i think
+        viewport.update(i, i1); //using this breaks it i think
     }
 
     @Override

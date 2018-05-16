@@ -1,3 +1,5 @@
 public interface CanAttack {
-    void attack(AliveThing target);
+    void damage(AliveThing target);
+    void attack(boolean left);//true if facing left
+
 }

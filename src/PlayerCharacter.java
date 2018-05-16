@@ -7,8 +7,8 @@ public class PlayerCharacter extends AliveThing {
     private int level;
     public final int EXP_PER_LEVEL = 10;
 
-    PlayerCharacter() {
-        super(new Sprite(new Texture(Gdx.files.internal("assets/FlabioFinal.png"))),
+    public PlayerCharacter() {
+        super(new Sprite(new Texture(Gdx.files.internal("FlabioFinal.png"))),
                 20,
                 20,
                 1,
@@ -21,14 +21,15 @@ public class PlayerCharacter extends AliveThing {
 
         if (this.xp > EXP_PER_LEVEL * this.level) {
             level++;
-            this.xp -= EXP_PER_LEVEL*level;
+            this.xp -= EXP_PER_LEVEL * level;
         }
     }
 
     public int getXp() {
         return xp;
     }
-    public void setXp(int xp){
+
+    public void setXp(int xp) {
         this.xp = xp;
     }
 
@@ -46,26 +47,26 @@ public class PlayerCharacter extends AliveThing {
 
 
     @Override
-    public void attack(AliveThing target) {
+    public void damage(AliveThing target) {
         target.takeDamage(this.weapon.damage);
         if (target.health <= 0 && target instanceof Enemy) {
             addXP(((Enemy) target).getDifficulty());
         }
     }
 
-    public boolean isTouching(Entity e){
+    public boolean isTouching(Entity e) {
         return this.sprite.getBoundingRectangle().overlaps(e.sprite.getBoundingRectangle());
     }
 
     @Override
-    public void collidePlayer()  {
-        System.out.println("NO\nPLAYER DOES NTO NEED TO CHECK COLLISION WITH ITSELF\nNEVER RUN THIS");
-        int i = 1/0;
+    public void collidePlayer(PlayerCharacter playerCharacter) {
+        System.out.println("NO\nPLAYER DOES NOT NEED TO CHECK COLLISION WITH ITSELF\nNEVER RUN THIS");
+        int i = 1 / 0;
     }
 
     @Override
-    public void think() {
-        System.out.println("NO\nPLAYER DOES NTO NEED TO CHECK COLLISION WITH ITSELF\nNEVER RUN THIS");
-        int i = 1/0;
+    public void think(GameMain game) {//potentially put player input here?
+        System.out.println("NO\nPLAYER DOES NOT NEED TO CHECK COLLISION WITH ITSELF\nNEVER RUN THIS");
+        int i = 1 / 0;
     }
 }

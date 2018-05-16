@@ -7,7 +7,6 @@ public class Main {
         cfg.title = "Game-Test";
         cfg.width = 1600;
         cfg.height = 960;
-
         new LwjglApplication(new GameMain(), cfg);
     }
 }

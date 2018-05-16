@@ -14,8 +14,10 @@ public abstract class Entity {
     public Entity(Sprite sprite) {
         this.sprite = sprite;
     }
-     public abstract void think();//should handle movement and such
-     public abstract void collidePlayer();//run when player touches them
+
+    public abstract void think(GameMain game);//should handle movement and such
+
+    public abstract void collidePlayer(PlayerCharacter playerCharacter);//run when player touches them
 
 
 }

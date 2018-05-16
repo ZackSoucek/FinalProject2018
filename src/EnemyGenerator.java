@@ -1,3 +1,6 @@
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+
 import java.util.ArrayList;
 
 public class EnemyGenerator {
@@ -6,11 +9,13 @@ public class EnemyGenerator {
      * @return an array of enemies which add up to the difficulty for the level
      * this can be modifed to give diffeent ammounts of enemies of difficulties
      */
-    public static ArrayList<Enemy> generate(int level) {
+    public static ArrayList<Enemy> generate(int level,int xMin, int xMax, int yMin, int yMax) {
         ArrayList<Enemy> enemies = new ArrayList<>();
         while (level <= 0) {
             int diff = (int) (Math.random() * level + 1);
-            enemies.add(enemyFinder(diff));
+            int x = (int)(Math.random()*(xMax-xMin))+xMin;
+            int y = (int)(Math.random()*(yMax-yMin))+yMin;
+            enemies.add(enemyFinder(diff,x,y));
             level -= diff;
         }
         return enemies;
@@ -21,7 +26,7 @@ public class EnemyGenerator {
      * @return a randomly selected enemy from the specifies difficlty
      * @Precondition difficulty is a valid enemy difficulty
      */
-    private static Enemy enemyFinder(int dificulty) {
+    private static Enemy enemyFinder(int dificulty, int x, int y) {
         //return an enemy that fits the given difficulty
         int rand = (int) (Math.random() * 100);//random value from 0-99 for generation fo a random enemy in the difficulty value
         switch (dificulty) {
@@ -31,7 +36,7 @@ public class EnemyGenerator {
                 } else if (rand < 60) {
                     //return new OtherTypeOfEnemy();
                 } else {
-                    //return new NormalEnemy();
+                    return new Zombie(x,y,new Texture(Gdx.files.internal("FlabioFinal.png")));
                 }
                 break;
 
@@ -49,24 +54,7 @@ public class EnemyGenerator {
                 //return new DefaultEnemy(diff);
         }
         //stub out
-        //an inline class creation because enemy is abstract
-        //todo remove
-        return new Enemy() {
-            @Override
-            public void attack(AliveThing target) {
-
-            }
-
-            @Override
-            public void think() {
-
-            }
-
-            @Override
-            public void collidePlayer() {
-
-            }
-        };
+        return new Zombie(x,y, new Texture(Gdx.files.internal("FlabioFinal.png")));
     }
 
 }

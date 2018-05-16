@@ -18,14 +18,12 @@ public class GameMain extends Game {
         playerCharacter = new PlayerCharacter();
         score = 0;
         this.setScreen(new TestMenuScreen(this));
-
     }
 
 
     @Override
     public void render() {
         super.render();//calls game's render, which i think call s the screen refreshes
-
     }
 
 
